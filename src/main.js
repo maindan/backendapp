@@ -92,7 +92,7 @@ app.post('/register', async(req, res) => {
     try{
         const sendData = await collection.insertMany(data);
     } catch(err){
-        return.res.status(500).json({msg:"um erro aconteceu"});
+        return res.status(500).json({msg:"um erro aconteceu"});
     }
 });
 
