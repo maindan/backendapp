@@ -83,14 +83,17 @@ app.post('/register', async(req, res) => {
 
     const saltRounds = 13
     const hashedPass = await bcrypt.hash(password, saltRounds);
-    data = {
+     return res.status(200).json({msg: 'Usuário criado com sucesso!'});
+    const data = {
         name: name,
         email: email,
         password: hashedPass,
     }
-    const sendData = await collection.insertMany(data);
-    return res.status(200).json({msg: 'Usuário criado com sucesso!'});
-
+    try{
+        const sendData = await collection.insertMany(data);
+    } catch(err){
+        return.res.status(500).json({msg:"um erro aconteceu"});
+    }
 });
 
 // Login Route
