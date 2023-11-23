@@ -83,7 +83,6 @@ app.post('/register', async(req, res) => {
 
     const saltRounds = 13
     const hashedPass = await bcrypt.hash(password, saltRounds);
-     return res.status(200).json({msg: 'Usuário criado com sucesso!'});
     const data = {
         name: name,
         email: email,
@@ -91,6 +90,7 @@ app.post('/register', async(req, res) => {
     }
     try{
         const sendData = await collection.insertMany(data);
+        return res.status(200).json({msg: 'Usuário criado com sucesso!'});
     } catch(err){
         return res.status(500).json({msg:"um erro aconteceu"});
     }
